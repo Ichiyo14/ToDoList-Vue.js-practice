@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ToDoリスト</title>
+  <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+  <div id="app">
+    <h1>To Do List</h1>
+    <form class="add-form" v-on:submit.prevent="doAdd">
+      タスク入力: <input type="text" ref="comment">
+      <button type="submit">追加</button>
+      <table>
+        <thead>
+          <tr>
+            <th class="status">状態</th>
+            <th class="comment">タスク</th>
+            <th class="button">削除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in todos" v-bind:key="item.id">
+            <td class="status">
+              <button v-on:click="changeState(item)">{{item.status}}</button>
+            </td>
+            <td class="comment">
+              <label v-on:dblclick="doEdit(item)" v-if="!item.edit">{{ item.comment }}</label>
+              <input v-else v-model="item.comment" v-focus class="edit" type="text" @blur="doneEdit(item)"
+                @keyup.enter="doneEdit(item)" />
+            </td>
+            <td class="button">
+              <button v-on:click="doRemove(item)">削除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
