@@ -16,14 +16,18 @@
       <table>
         <thead>
           <tr>
+            <th class="status">状態</th>
             <th class="comment">タスク</th>
             <th class="button">削除</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in todos" v-bind:key="item.id">
+            <td class="status">
+              <button v-on:click="changeState(item)">{{item.status}}</button>
+            </td>
             <td class="comment">
-              <label v-on:dblclick="doEdit(item)" v-if="!item.edit">・{{ item.comment }}</label>
+              <label v-on:dblclick="doEdit(item)" v-if="!item.edit">{{ item.comment }}</label>
               <input v-else v-model="item.comment" v-focus class="edit" type="text" @blur="doneEdit(item)"
                 @keyup.enter="doneEdit(item)" />
             </td>

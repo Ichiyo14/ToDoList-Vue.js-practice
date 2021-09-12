@@ -29,7 +29,7 @@ const app = new Vue({
         id: todoStorage.uid++,
         comment: comment.value,
         edit: false,
-        editedComment: null
+        status: "未完了"
       })
       comment.value = ''
     },
@@ -48,6 +48,13 @@ const app = new Vue({
       item.edit = false
       if (!item.comment) {
         this.doRemove(item)
+      }
+    },
+    changeState: function(item) {
+      if (item.status === "未完了") {
+        item.status = "完了"
+      } else {
+        item.status = "未完了"
       }
     }
   },
